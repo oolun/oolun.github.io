@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
+    <title>OpenClaw 和 本地模型 Ollama - 数字移民</title>
+    
+<link rel="stylesheet" href="/css/reset.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/markdown.css">
+
+    
+<link rel="stylesheet" href="/css/a11y-dark.min.css">
+
+    
+<link rel="stylesheet" href="/css/custom.css">
+
+    <script src="/js/highlight.min.js"></script>
+    <script src="/js/highlightjs-line-numbers.js"></script>
+    <script src="/js/copy-code.js"></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+    <body>
+        <div class="paper">
+            <div class="paper-main">
+                <div class="post-header">
+    <a class="logo" href="/">数字移民</a>
+</div>
+<div class="post-main">
+
+    
+    
+        <div class="post-main-title">
+            OpenClaw 和 本地模型 Ollama
+        </div>
+        <div class="post-content-meta">
+            2026-02-26
+        </div>
+        <div class="post-md">
+            <h4 id="1-安装本地模型，如果想用云端API可忽略"><a href="#1-安装本地模型，如果想用云端API可忽略" class="headerlink" title="1. 安装本地模型，如果想用云端API可忽略"></a>1. 安装本地模型，如果想用云端API可忽略</h4><p>安装Ollama: <code>curl -fsSL https://ollama.com/install.sh | sh</code></p>
+<p>下载模型: <code>ollama pull qwen3:4b</code></p>
+<p>测试模型: <code>ollama run qwen3:4b</code></p>
+<h4 id="2-安装OpenClaw"><a href="#2-安装OpenClaw" class="headerlink" title="2. 安装OpenClaw"></a>2. 安装OpenClaw</h4><p>安装OpenClaw: <code>curl -fsSL https://openclaw.ai/install.sh | bash</code></p>
+<p>安装向导: <code>openclaw onboard --install-daemon</code></p>
+<ul>
+<li>I understand this is powerful and inherently risky. Continue? -&gt; Yes</li>
+<li>Onboarding mode -&gt; QuickStart</li>
+<li>Config handling -&gt; Update values</li>
+<li>Model&#x2F;auth provider -&gt; Skip for now</li>
+<li>Filter models by provider -&gt; ollama</li>
+<li>Default model -&gt; ollama&#x2F;qwen3:4b</li>
+<li>Select channel (QuickStart) -&gt; Skip for now</li>
+<li>Configure skills now? (recommended) -&gt; No</li>
+<li>Enable hooks? -&gt; Skip for now</li>
+<li>Gateway service already installed -&gt; Restart</li>
+<li>How do you want to hatch your bot? -&gt; Hatch in TUI</li>
+</ul>
+<p>到这一步，你的本地 AI 助手就已经跑起来了。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://docs.openclaw.ai/start/getting-started">入门指南</a></p>
+
+        </div>
+        
+        
+            <div class="post-content-meta tags">
+                <div class="emo">#</div>
+                <div>
+                    
+                        <a href="/tags/LLM/">LLM</a>
+                    
+                </div>
+            </div>
+        
+
+    
+
+</div>
+<div class="post-header">
+    <a class="go-home" href="javascript:history.back()">
+        <svg width="8" height="14" viewBox="0 0 8 14">
+            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+</div>
+
+                <div class="footer">
+    <span id="copyright-year">Copyright © <span id="year"></span> 数字移民</span>
+    <script type="text/javascript">
+     document.addEventListener('DOMContentLoaded', function() {
+      var yearElement = document.getElementById('year');
+      if (yearElement) {
+        var currentYear = new Date().getFullYear();
+        yearElement.textContent = currentYear;
+      }
+    });
+    
+    window.addEventListener('touchstart', function(event) {
+    // 处理 touchstart 事件的逻辑
+    // 如果不需要调用 event.preventDefault()，可以将事件处理程序标记为 'passive'
+     }, { passive: true });
+   </script>
+
+</div>
+
+
+            </div>
+        </div>
+    </body>
+</html>

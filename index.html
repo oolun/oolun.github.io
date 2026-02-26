@@ -45,10 +45,33 @@
 <div class="post-list">
     
     <div class="post ">
+        <a class="post-title" href="/2026/02/26/openclaw-ollama/">OpenClaw 和 本地模型 Ollama</a>
+        <div class="post-except">
+            1. 安装本地模型，如果想用云端API可忽略安装Ollama: curl -fsSL https://ollama.com/install.sh | sh
+下载模型: ollama pull qwen3:4b
+测试模型: ollama run qwen3:4b
+2. 安装OpenClaw安装OpenClaw: curl -fsSL https://openclaw.ai/install.sh | bash
+安装向导: openclaw onboard --install-da
+            <a class="read-more" href="/2026/02/26/openclaw-ollama/"> ...... </a>
+        </div>
+        <div class="post-meta">
+            <div class="post-date">2026.02.26</div>
+            
+                <div class="post-tags">
+                    <span class="tag-emoji">#</span>
+                    
+                        <a href="/tags/LLM/" class="post-tag">LLM</a>
+                    
+                </div>
+            
+        </div>
+    </div>
+    
+    <div class="post ">
         <a class="post-title" href="/2025/02/28/c-least-squares/">用 C 语言实现最小二乘法算法</a>
         <div class="post-except">
             有些嵌入式系统的 IDE 不支持结构体，所以改了一个通俗易懂版本。
-#include &lt;stdio.h&gt;#define LEN 100float DataInX[LEN];float DataInY[LEN];unsigned char GucDataLength;void push(float x, float y) {    int i &#x3D; 0;    if (GucDataLength &lt; LEN) {        DataInX[GucD
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include &lt;stdio.h&gt;#define LEN 100float DataInX[LEN];float DataInY[LEN];unsigned char GucDat
             <a class="read-more" href="/2025/02/28/c-least-squares/"> ...... </a>
         </div>
         <div class="post-meta">
@@ -220,26 +243,6 @@ GPIO_InitTypeDef GPIO_InitStructure;RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA 
                     <span class="tag-emoji">#</span>
                     
                         <a href="/tags/VS-Code/" class="post-tag">VS Code</a>
-                    
-                </div>
-            
-        </div>
-    </div>
-    
-    <div class="post ">
-        <a class="post-title" href="/2024/09/03/firefox-disabled-tabmanager/">Firefox 隐藏「列出所有标签页」按钮</a>
-        <div class="post-except">
-            地址栏访问 about:config，搜索 browser.tabs.tabmanager.enabled，并将其值设置为 FALSE 即可。
-
-            <a class="read-more" href="/2024/09/03/firefox-disabled-tabmanager/"> ...... </a>
-        </div>
-        <div class="post-meta">
-            <div class="post-date">2024.09.03</div>
-            
-                <div class="post-tags">
-                    <span class="tag-emoji">#</span>
-                    
-                        <a href="/tags/Windows/" class="post-tag">Windows</a>
                     
                 </div>
             

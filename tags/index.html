@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1f7ae0">
-  <title>避坑！使用 STM32F4 的 DMA 时需要这样设置！ | 数字移民</title>
+  <title>Tags | 数字移民</title>
   <link rel="icon" href="/favicon.ico">
   
 <link rel="stylesheet" href="/css/style.css">
@@ -44,29 +44,11 @@
 
 
   <main class="main container">
-    <article class="post-single">
+    <article class="page-single">
   <header class="post-head">
-    <h1>避坑！使用 STM32F4 的 DMA 时需要这样设置！</h1>
-    <div class="post-meta">
-      <span>Posted <time datetime="2025-02-20T02:00:00.000Z">2025-02-20</time></span>
-      
-        <span>· Words 245</span>
-      
-    </div>
+    <h1>Tags</h1>
   </header>
-
-  <div class="post-content"><p>最近有个项目使用 STM32F407 USART1 串口发送数据，借助 DMA 方式。</p>
-<p>发现一个问题：需要检测发送完成标志位后清除标志位后才能再次发送，而之前使用 STM32F103 却不需要清标志位的操作。</p>
-<p>清除标志位的示例代码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (DMA_GetFlagStatus(DMA2_Stream7, DMA_FLAG_TCIF7) != RESET) &#123; </span><br><span class="line">    DMA_ClearFlag(DMA2_Stream7, DMA_FLAG_TCIF7);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-  
-    <div class="post-tags">
-      
-        <a href="/tags/MCU/">#MCU</a>
-      
-    </div>
-  
+  <div class="post-content"></div>
 </article>
 
   </main>

@@ -1,96 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
-    <link rel="alternate icon" type="image/png" href="/img/favicon.png">
-    <title>用 C 语言实现最小二乘法算法 - 数字移民</title>
-    
-<link rel="stylesheet" href="/css/reset.css">
-
-    
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1f7ae0">
+  <title>用 C 语言实现最小二乘法算法 | 数字移民</title>
+  <link rel="icon" href="/favicon.ico">
+  
 <link rel="stylesheet" href="/css/style.css">
 
-    
-<link rel="stylesheet" href="/css/markdown.css">
-
-    
-<link rel="stylesheet" href="/css/a11y-dark.min.css">
-
-    
-<link rel="stylesheet" href="/css/custom.css">
-
-    <script src="/js/highlight.min.js"></script>
-    <script src="/js/highlightjs-line-numbers.js"></script>
-    <script src="/js/copy-code.js"></script>
+  <link rel="stylesheet" href="/vendor/highlight/github.min.css" media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href="/vendor/highlight/github-dark.min.css" media="(prefers-color-scheme: dark)">
 <meta name="generator" content="Hexo 7.3.0"></head>
-    <body>
-        <div class="paper">
-            <div class="paper-main">
-                <div class="post-header">
-    <a class="logo" href="/">数字移民</a>
-</div>
-<div class="post-main">
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
 
-    
-    
-        <div class="post-main-title">
-            用 C 语言实现最小二乘法算法
-        </div>
-        <div class="post-content-meta">
-            2025-02-28
-        </div>
-        <div class="post-md">
-            <p>有些嵌入式系统的 IDE 不支持结构体，所以改了一个通俗易懂版本。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#define LEN 100</span><br><span class="line">float DataInX[LEN];</span><br><span class="line">float DataInY[LEN];</span><br><span class="line">unsigned char GucDataLength;</span><br><span class="line">void push(float x, float y) &#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    if (GucDataLength &lt; LEN) &#123;</span><br><span class="line">        DataInX[GucDataLength] = x;</span><br><span class="line">        DataInY[GucDataLength++] = y;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    // 数据移动,去掉最后一个数据</span><br><span class="line">    for (i = 0; i &lt; LEN - 1; i++) &#123;</span><br><span class="line">        DataInX[i] = DataInX[i + 1];</span><br><span class="line">        DataInY[i] = DataInY[i + 1];</span><br><span class="line">    &#125;</span><br><span class="line">    DataInY[LEN] = x;</span><br><span class="line">    DataInY[LEN] = y;</span><br><span class="line">    GucDataLength = LEN;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">float calc(float x) &#123;</span><br><span class="line">    int i = 0;</span><br><span class="line">    float mean_x = 0;</span><br><span class="line">    float mean_y = 0;</span><br><span class="line">    float num1 = 0;</span><br><span class="line">    float num2 = 0;</span><br><span class="line">    float a = 0;</span><br><span class="line">    float b = 0;</span><br><span class="line">    //求t,y的均值</span><br><span class="line">    for (i = 0; i &lt; GucDataLength; i++) &#123;</span><br><span class="line">        mean_x += DataInX[i];</span><br><span class="line">        mean_y += DataInY[i];</span><br><span class="line">    &#125;</span><br><span class="line">    mean_x /= GucDataLength;</span><br><span class="line">    mean_y /= GucDataLength;</span><br><span class="line">    printf(&quot;mean_x = %f,mean_y = %f\n&quot;, mean_x, mean_y);</span><br><span class="line">    for (i = 0; i &lt; GucDataLength; i++) &#123;</span><br><span class="line">        num1 += (DataInX[i] - mean_x) * (DataInY[i] - mean_y);</span><br><span class="line">        num2 += (DataInX[i] - mean_x) * (DataInX[i] - mean_x);</span><br><span class="line">    &#125;</span><br><span class="line">    a = num1 / num2;</span><br><span class="line">    b = mean_y - b * mean_x;</span><br><span class="line">    printf(&quot;a = %f,b = %f\n&quot;, a, b);</span><br><span class="line">    return (a * x + b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    float data_x[7] = &#123;0, 1, 2, 3, 4, 5, 6&#125;;</span><br><span class="line">    float data_y[7] = &#123;-88, 16, -20, 11, 1, 1, -60&#125;;</span><br><span class="line">    int i = 0;</span><br><span class="line">    for (i = 0; i &lt; 7; i++) &#123;</span><br><span class="line">        push(data_x[i], data_y[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    /* 计算x=10时y值 */</span><br><span class="line">    printf(&quot;data_y[10] = %f\n&quot;, calc(10));</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <header class="site-header">
+  <div class="container head-inner">
+    <a class="brand" href="/">
+      <img src="/images/avatar.png" alt="avatar">
+      <div>
+        <strong>数字移民</strong>
+        <span>A place where I can write something or nothing.</span>
+      </div>
+    </a>
+
+    <nav class="menu">
+      
+        <a href="/">Home</a>
+      
+        <a href="/archives/">Archives</a>
+      
+        <a href="/categories/">Categories</a>
+      
+        <a href="/tags/">Tags</a>
+      
+    </nav>
+
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="toggle theme">Theme</button>
+  </div>
+</header>
+
+
+  <main class="main container">
+    <article class="post-single">
+  <header class="post-head">
+    <h1>用 C 语言实现最小二乘法算法</h1>
+    <div class="post-meta">
+      <span>Posted <time datetime="2025-02-28T02:00:00.000Z">2025-02-28</time></span>
+      
+        <span>· Words 1690</span>
+      
+    </div>
+  </header>
+
+  <div class="post-content"><p>有些嵌入式系统的 IDE 不支持结构体，改为数组方式。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LEN 100</span></span><br><span class="line"><span class="type">float</span> DataInX[LEN];</span><br><span class="line"><span class="type">float</span> DataInY[LEN];</span><br><span class="line"><span class="type">unsigned</span> <span class="type">char</span> GucDataLength;</span><br><span class="line"><span class="type">void</span> <span class="title function_">push</span><span class="params">(<span class="type">float</span> x, <span class="type">float</span> y)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (GucDataLength &lt; LEN) &#123;</span><br><span class="line">        DataInX[GucDataLength] = x;</span><br><span class="line">        DataInY[GucDataLength++] = y;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 数据移动,去掉最后一个数据</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; LEN - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        DataInX[i] = DataInX[i + <span class="number">1</span>];</span><br><span class="line">        DataInY[i] = DataInY[i + <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    DataInY[LEN] = x;</span><br><span class="line">    DataInY[LEN] = y;</span><br><span class="line">    GucDataLength = LEN;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">float</span> <span class="title function_">calc</span><span class="params">(<span class="type">float</span> x)</span> &#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">float</span> mean_x = <span class="number">0</span>;</span><br><span class="line">    <span class="type">float</span> mean_y = <span class="number">0</span>;</span><br><span class="line">    <span class="type">float</span> num1 = <span class="number">0</span>;</span><br><span class="line">    <span class="type">float</span> num2 = <span class="number">0</span>;</span><br><span class="line">    <span class="type">float</span> a = <span class="number">0</span>;</span><br><span class="line">    <span class="type">float</span> b = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//求t,y的均值</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; GucDataLength; i++) &#123;</span><br><span class="line">        mean_x += DataInX[i];</span><br><span class="line">        mean_y += DataInY[i];</span><br><span class="line">    &#125;</span><br><span class="line">    mean_x /= GucDataLength;</span><br><span class="line">    mean_y /= GucDataLength;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;mean_x = %f,mean_y = %f\n&quot;</span>, mean_x, mean_y);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; GucDataLength; i++) &#123;</span><br><span class="line">        num1 += (DataInX[i] - mean_x) * (DataInY[i] - mean_y);</span><br><span class="line">        num2 += (DataInX[i] - mean_x) * (DataInX[i] - mean_x);</span><br><span class="line">    &#125;</span><br><span class="line">    a = num1 / num2;</span><br><span class="line">    b = mean_y - b * mean_x;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;a = %f,b = %f\n&quot;</span>, a, b);</span><br><span class="line">    <span class="keyword">return</span> (a * x + b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">float</span> data_x[<span class="number">7</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;;</span><br><span class="line">    <span class="type">float</span> data_y[<span class="number">7</span>] = &#123;<span class="number">-88</span>, <span class="number">16</span>, <span class="number">-20</span>, <span class="number">11</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">-60</span>&#125;;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++) &#123;</span><br><span class="line">        push(data_x[i], data_y[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 计算x=10时y值 */</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;data_y[10] = %f\n&quot;</span>, calc(<span class="number">10</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>转载：<a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15077560/4686280">用C语言实现最小二乘法算法</a></p>
-
-        </div>
-        
-        
-            <div class="post-content-meta tags">
-                <div class="emo">#</div>
-                <div>
-                    
-                        <a href="/tags/MCU/">MCU</a>
-                    
-                </div>
-            </div>
-        
-
-    
-
-</div>
-<div class="post-header">
-    <a class="go-home" href="javascript:history.back()">
-        <svg width="8" height="14" viewBox="0 0 8 14">
-            <path d="M7 1L1 7l6 6" stroke="#000" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </a>
 </div>
 
-                <div class="footer">
-    <span id="copyright-year">Copyright © <span id="year"></span> 数字移民</span>
-    <script type="text/javascript">
-     document.addEventListener('DOMContentLoaded', function() {
-      var yearElement = document.getElementById('year');
-      if (yearElement) {
-        var currentYear = new Date().getFullYear();
-        yearElement.textContent = currentYear;
-      }
-    });
-    
-    window.addEventListener('touchstart', function(event) {
-    // 处理 touchstart 事件的逻辑
-    // 如果不需要调用 event.preventDefault()，可以将事件处理程序标记为 'passive'
-     }, { passive: true });
-   </script>
+  
+    <div class="post-tags">
+      
+        <a href="/tags/MCU/">#MCU</a>
+      
+    </div>
+  
+</article>
 
-</div>
+  </main>
 
+  <footer class="site-footer">
+  <div class="container foot-inner">
+    <span>&copy; 2026 数字移民</span>
+    <span>Hexo Powered · Theme Nova</span>
+  </div>
+</footer>
 
-            </div>
-        </div>
-    </body>
+  <script src="/vendor/highlight/highlight.min.js"></script>
+  
+<script src="/js/main.js"></script>
+
+</body>
 </html>
